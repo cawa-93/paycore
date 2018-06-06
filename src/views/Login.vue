@@ -1,7 +1,7 @@
 <template>
   <div class='home'>
     <el-card class='box-card'>
-      <login-form></login-form>
+      <login-form @login='saveUser'></login-form>
     </el-card>
   </div>
 </template>
@@ -12,8 +12,20 @@ import LoginForm from '@/components/login-form.vue'
 
 export default {
   name: 'home',
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.getters.isUserAuth) {
+        vm.$router.replace('/about')
+      }
+    })
+  },
   components: {
     LoginForm
+  },
+  methods: {
+    saveUser (authData) {
+      this.$store.commit('initUser', authData)
+    }
   }
 }
 </script>

@@ -29,8 +29,8 @@ export default {
       alerts: [
       ],
       form: {
-        login: '',
-        password: ''
+        login: 'administrator@sdk.finance',
+        password: '1'
       },
       validation: {
         login: false,
