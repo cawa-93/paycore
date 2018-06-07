@@ -15,7 +15,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.$store.getters.isUserAuth) {
-        vm.$router.replace('/about')
+        vm.$router.replace({name: 'users'})
       }
     })
   },
@@ -25,6 +25,7 @@ export default {
   methods: {
     saveUser (authData) {
       this.$store.commit('initUser', authData)
+      this.$router.replace({name: 'users'})
     }
   }
 }
