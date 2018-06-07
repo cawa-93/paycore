@@ -18,41 +18,71 @@
       <el-main>
         <template v-if='users && users.records'>
           <el-table
+            stripe
             :data='users.records'>
             <el-table-column
               prop='name'
-              label='Name'>
+              label='Name'
+              min-width='150px'>
             </el-table-column>
             <el-table-column
-              prop='contact.email'
-              label='Email'>
+              label='Email'
+              min-width='150px'>
+              <template slot-scope='scope'>
+                <a :href='`mailto:${scope.row.contact.email}`' :title='`Email ${scope.row.contact.emailVerified ? "" : "not "}verified`'>
+                  <el-tag :type='scope.row.contact.emailVerified ? "success" : "danger"'>
+                    {{scope.row.contact.email}}
+                  </el-tag>
+                </a>
+              </template>
             </el-table-column>
             <el-table-column
-              prop='contact.phoneNumber'
               label='Phone number'>
+              <template slot-scope='scope'>
+                {{scope.row.contact.phoneNumber || '—'}}
+              </template>
             </el-table-column>
             <el-table-column
-              prop='contact.countryCode'
               label='Country code'>
+              <template slot-scope='scope'>
+                <el-tag v-if='scope.row.contact.countryCode'>
+                  {{scope.row.contact.countryCode}}
+                </el-tag>
+                <span v-else>—</span>
+              </template>
             </el-table-column>
             <el-table-column
-              prop='members.length'
               label='Organizations'>
+              <template slot-scope='scope'>
+                <el-tag>
+                  {{scope.row.members.length}}
+                </el-tag>
+              </template>
             </el-table-column>
             <el-table-column
-              prop='banExpiryDate'
               label='Ban expiry date'>
+              <template slot-scope='scope'>
+                <time :datetime='scope.row.banExpiryDate' v-if='scope.row.banExpiryDate'>
+                  {{new Date(scope.row.banExpiryDate).toLocaleString()}}
+                </time>
+                <span v-else>—</span>
+              </template>
             </el-table-column>
             <el-table-column
-              prop='createdAt'
               label='Created at'>
+              <template slot-scope='scope'>
+                <time :datetime='scope.row.createdAt' v-if='scope.row.createdAt'>
+                  {{new Date(scope.row.createdAt).toLocaleString()}}
+                </time>
+                <span v-else>—</span>
+              </template>
             </el-table-column>
           </el-table>
 
           <el-pagination
             class='pagination'
             background
-            layout='prev, pager, next'
+            layout='total, prev, pager, next'
             :total.sync='users.totalRecords' :page-size='table.pageSize' :current-page.sync='table.pageNumber'>
           </el-pagination>
 
@@ -144,6 +174,11 @@ $space: 50px;
 }
 .pagination {
   margin-top: $space/2;
+  display: flex;
+}
+.pagination .el-pagination__total {
+  margin-right: auto;
+  font-weight: bold;
 }
 .footer {
   margin-top: $space;

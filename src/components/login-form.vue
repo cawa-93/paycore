@@ -1,5 +1,11 @@
 <template>
   <div>
+    <el-alert
+      title='Необхідна авторизація'
+      description='Вы повинні авторизуватись перш ніж переглянути список користувачів'
+      type='warning'
+      show-icon>
+    </el-alert>
     <el-form label-position='right' label-width='100px' :model='form' :rules='rules' ref='loginForm' @validate='onValidate'>
       <el-form-item label='Login' prop='login'>
         <el-input type='email' autofocus v-model.trim='form.login'></el-input>
@@ -21,8 +27,8 @@ export default {
   data () {
     return {
       form: {
-        login: 'administrator@sdk.finance',
-        password: '1'
+        login: '',
+        password: ''
       },
       validation: {
         login: false,
