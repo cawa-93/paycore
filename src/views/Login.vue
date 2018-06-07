@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 .home {
   display: flex;
   justify-content: center;
@@ -44,6 +44,7 @@ export default {
 }
 
 .logo {
-  margin-bottom: 50px;
+  width: 400px;
+  margin-bottom: 25px;
 }
 </style>

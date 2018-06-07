@@ -25,6 +25,10 @@ export default {
 .logo-link img {
   display: block;
   max-height: 100%;
+}
+.logo-link img {
   height: 100%;
+  width: 100%;
+
 }
 </style>

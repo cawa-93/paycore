@@ -10,8 +10,9 @@ import router from './router'
 
 import fontawesome from '@fortawesome/fontawesome'
 import faSignOutAlt from '@fortawesome/fontawesome-free-solid/faSignOutAlt'
+import faHome from '@fortawesome/fontawesome-free-solid/faHome'
 
-fontawesome.library.add(faSignOutAlt)
+fontawesome.library.add(faSignOutAlt, faHome)
 
 Vue.use(Vuex)
 Vue.use(AsyncComputed)

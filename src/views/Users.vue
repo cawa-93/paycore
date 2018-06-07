@@ -1,19 +1,9 @@
 <template>
   <el-container>
-    <el-header class='header'>
-      <el-row type='flex' class='row-bg' justify='space-between'>
-        <el-col :span='12'><logo class='logo'></logo></el-col>
-        <el-col :span='2'>
-          <el-button type='primary' circle @click='logOut' title='logout'>
-            <font-awesome-icon icon='sign-out-alt' />
-          </el-button>
-        </el-col>
-      </el-row>
-
-    </el-header>
     <el-container>
       <el-aside width='200px'>
-        <router-link to='/'>Home</router-link>
+        <logo class='logo'></logo>
+        <fake-menu @logout='logOut'></fake-menu>
       </el-aside>
       <el-main>
         <template v-if='users && users.records'>
@@ -90,17 +80,16 @@
 
       </el-main>
     </el-container>
-    <el-footer class='footer'>Footer</el-footer>
   </el-container>
 </template>
 
 <script>
 import axios from 'axios'
 import logo from '@/components/logo'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import fakeMenu from '@/components/fake-menu'
 export default {
   name: 'Users',
-  components: {FontAwesomeIcon, logo},
+  components: {logo, fakeMenu},
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (!vm.$store.getters.isUserAuth) {
@@ -164,23 +153,28 @@ export default {
 }
 </script>
 
-<style scope lang="scss">
+<style scoped lang="scss">
 $space: 50px;
 .header {
   margin-bottom: $space;
 }
 .logo {
-  height: 60px;
-}
-.pagination {
-  margin-top: $space/2;
-  display: flex;
-}
-.pagination .el-pagination__total {
-  margin-right: auto;
-  font-weight: bold;
+  height: auto;
+  width: 100%;
 }
 .footer {
   margin-top: $space;
 }
+</style>
+
+<style  lang="scss">
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  .el-pagination__total {
+    margin-right: auto;
+    font-weight: bold;
+  }
+}
+
 </style>
