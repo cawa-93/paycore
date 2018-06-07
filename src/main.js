@@ -7,6 +7,11 @@ import AsyncComputed from 'vue-async-computed'
 import App from './App.vue'
 import router from './router'
 
+import fontawesome from '@fortawesome/fontawesome'
+import faSignOutAlt from '@fortawesome/fontawesome-free-solid/faSignOutAlt'
+
+fontawesome.library.add(faSignOutAlt)
+
 Vue.use(Vuex)
 Vue.use(AsyncComputed)
 Vue.use(ElementUI)

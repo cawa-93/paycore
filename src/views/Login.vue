@@ -1,6 +1,6 @@
 <template>
   <div class='home'>
-    <logo></logo>
+    <logo class='logo'></logo>
     <el-card class='box-card'>
       <login-form @login='saveUser'></login-form>
     </el-card>
@@ -38,6 +38,12 @@ export default {
 .home {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 60px 0;
+  flex-direction: column
+}
+
+.logo {
+  margin-bottom: 50px;
 }
 </style>
