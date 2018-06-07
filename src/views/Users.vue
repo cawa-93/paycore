@@ -95,17 +95,34 @@ export default {
       if (!this.$store.getters.isUserAuth) {
         return null
       }
-      const {data} = await axios.post('https://sandbox.sdk.finance/api/v1/users/view', {
-        pageSize: this.table.pageSize,
-        pageNumber: this.table.pageNumber - 1,
-        sort: this.table.sort
-      }, {
-        headers: {
-          Authorization: `TOKEN ${this.$store.state.user.authorizationToken.token}`
-        }
-      })
+      try {
+        const {data} = await axios.post('https://sandbox.sdk.finance/api/v1/users/view', {
+          pageSize: this.table.pageSize,
+          pageNumber: this.table.pageNumber - 1,
+          sort: this.table.sort
+        }, {
+          headers: {
+            Authorization: `TOKEN ${this.$store.state.user.authorizationToken.token}`
+          }
+        })
 
-      return data
+        return data
+      } catch (e) {
+        if (e.response) {
+          console.error(e.response)
+          this.$notify.error({
+            title: 'Connection error',
+            message: e.response.data
+          })
+        } else {
+          this.$notify.error({
+            title: e.toString(),
+            message: e.stack
+          })
+          console.error(e)
+        }
+      }
+      return null
     }
   },
   methods: {

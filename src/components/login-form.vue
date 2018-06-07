@@ -1,11 +1,5 @@
 <template>
   <div>
-    <el-alert v-for='(alert, i) in alerts'
-              :key='i'
-              :title='alert.title'
-              :type='alert.type || "error"'
-              @close='deleteAlert(i)'>
-    </el-alert>
     <el-form label-position='right' label-width='100px' :model='form' :rules='rules' ref='loginForm' @validate='onValidate'>
       <el-form-item label='Login' prop='login'>
         <el-input type='email' autofocus v-model.trim='form.login'></el-input>
@@ -26,8 +20,6 @@ export default {
   name: 'login-form',
   data () {
     return {
-      alerts: [
-      ],
       form: {
         login: 'administrator@sdk.finance',
         password: '1'
@@ -52,9 +44,6 @@ export default {
     }
   },
   methods: {
-    deleteAlert (index) {
-      this.alerts.splice(index, 1)
-    },
     onValidate (name, state) {
       this.validation[name] = state
     },
@@ -69,10 +58,15 @@ export default {
       } catch (e) {
         if (e.response) {
           console.error(e.response)
-          this.alerts.push({title: e.response.data.message})
+          this.$notify.error({
+            title: e.response.data.message
+          })
         } else {
+          this.$notify.error({
+            title: e.toString(),
+            message: e.stack
+          })
           console.error(e)
-          this.alerts.push({title: e.toString()})
         }
       }
     }
