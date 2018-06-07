@@ -1,7 +1,7 @@
 <template>
   <el-menu :router='true'>
 
-    <el-menu-item index='/'>
+    <el-menu-item :route='{name: "login"}'>
       <font-awesome-icon icon='home' class='el-icon-'/>
       <span>Login page</span>
     </el-menu-item>
@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-icon- {
   color:#909399
 }

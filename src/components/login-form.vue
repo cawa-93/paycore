@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/plugins/axios'
 export default {
   name: 'login-form',
   data () {
@@ -55,7 +55,7 @@ export default {
     },
     async onSubmit () {
       try {
-        const {data} = await axios.post('https://sandbox.sdk.finance/api/v1/authorization', {
+        const {data} = await axios.post('/authorization', {
           login: this.form.login,
           password: this.form.password
         })
@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-alert {
   margin-bottom: 10px;
 }

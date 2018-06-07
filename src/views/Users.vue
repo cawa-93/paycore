@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/plugins/axios'
 import logo from '@/components/logo'
 import fakeMenu from '@/components/fake-menu'
 export default {
@@ -115,7 +115,7 @@ export default {
         return null
       }
       try {
-        const {data} = await axios.post('https://sandbox.sdk.finance/api/v1/users/view', {
+        const {data} = await axios.post('/users/view', {
           pageSize: this.table.pageSize,
           pageNumber: this.table.pageNumber - 1,
           sort: this.table.sort

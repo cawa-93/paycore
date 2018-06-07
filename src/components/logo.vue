@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .logo-link,
 .logo-link img {
   display: block;
