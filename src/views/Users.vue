@@ -1,57 +1,66 @@
 <template>
   <el-container>
-    <el-header>Header</el-header>
-    <el-main>
-      <template v-if='users && users.records'>
+    <el-header>
+      <logo></logo>
+    </el-header>
+    <el-container>
+      <el-aside width='200px'>
+        <router-link to='/'>Home</router-link>
+      </el-aside>
+      <el-main>
+        <template v-if='users && users.records'>
 
-        <el-table
-          :data='users.records'>
-          <el-table-column
-            prop='name'
-            label='Name'>
-          </el-table-column>
-          <el-table-column
-            prop='contact.email'
-            label='Email'>
-          </el-table-column>
-          <el-table-column
-            prop='contact.phoneNumber'
-            label='Phone number'>
-          </el-table-column>
-          <el-table-column
-            prop='contact.countryCode'
-            label='Country code'>
-          </el-table-column>
-          <el-table-column
-            prop='members.length'
-            label='Organizations'>
-          </el-table-column>
-          <el-table-column
-            prop='banExpiryDate'
-            label='Ban expiry date'>
-          </el-table-column>
-          <el-table-column
-            prop='createdAt'
-            label='Created at'>
-          </el-table-column>
-        </el-table>
-        <el-pagination
-          background
-          layout='prev, pager, next'
-          :total.sync='users.totalRecords' :page-size='table.pageSize' :current-page.sync='table.pageNumber'>
-        </el-pagination>
+          <el-table
+            :data='users.records'>
+            <el-table-column
+              prop='name'
+              label='Name'>
+            </el-table-column>
+            <el-table-column
+              prop='contact.email'
+              label='Email'>
+            </el-table-column>
+            <el-table-column
+              prop='contact.phoneNumber'
+              label='Phone number'>
+            </el-table-column>
+            <el-table-column
+              prop='contact.countryCode'
+              label='Country code'>
+            </el-table-column>
+            <el-table-column
+              prop='members.length'
+              label='Organizations'>
+            </el-table-column>
+            <el-table-column
+              prop='banExpiryDate'
+              label='Ban expiry date'>
+            </el-table-column>
+            <el-table-column
+              prop='createdAt'
+              label='Created at'>
+            </el-table-column>
+          </el-table>
+          <el-pagination
+            background
+            layout='prev, pager, next'
+            :total.sync='users.totalRecords' :page-size='table.pageSize' :current-page.sync='table.pageNumber'>
+          </el-pagination>
 
-      </template>
+        </template>
 
-    </el-main>
+      </el-main>
+    </el-container>
     <el-footer>Footer</el-footer>
   </el-container>
 </template>
 
 <script>
 import axios from 'axios'
+import logo from '@/components/logo'
 export default {
   name: 'Users',
+  components: {logo},
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (!vm.$store.getters.isUserAuth) {

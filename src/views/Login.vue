@@ -1,5 +1,6 @@
 <template>
   <div class='home'>
+    <logo></logo>
     <el-card class='box-card'>
       <login-form @login='saveUser'></login-form>
     </el-card>
@@ -9,6 +10,7 @@
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/login-form.vue'
+import logo from '@/components/logo'
 
 export default {
   name: 'home',
@@ -20,7 +22,8 @@ export default {
     })
   },
   components: {
-    LoginForm
+    LoginForm,
+    logo
   },
   methods: {
     saveUser (authData) {
